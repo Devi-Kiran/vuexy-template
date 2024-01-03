@@ -1,9 +1,11 @@
 import { Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import ModalBasic from '../@core/components/Model'
 
 const Home = () => {
   return (
     <div>
-      <Card>
+      <ModalBasic/>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Kick start your project 🚀</CardTitle>
         </CardHeader>
@@ -41,7 +43,7 @@ const Home = () => {
             to get more out of JWT authentication.
           </CardText>
         </CardBody>
-      </Card>
+      </Card> */}
     </div>
   )
 }

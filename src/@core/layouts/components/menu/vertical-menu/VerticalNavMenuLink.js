@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { NavLink, useLocation, matchPath, useParams } from 'react-router-dom'
 
 // ** Third Party Components
-import { Badge } from 'reactstrap'
+import { Badge, Button } from 'reactstrap'
 import classnames from 'classnames'
 
 // ** Vertical Menu Array Of Items
@@ -105,7 +105,6 @@ const VerticalNavMenuLink = ({
       >
         {item.icon}
         <span className='menu-item text-truncate'>{item.title}</span>
-
         {item.badge && item.badgeText ? (
           <Badge className='ml-auto mr-1' color={item.badge} pill>
             {item.badgeText}
