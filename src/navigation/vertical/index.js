@@ -142,25 +142,21 @@ export default [
       {
         id: 'cbkList',
         title: 'CBK List',
-        icon: <Circle size={12} />,
         navLink: '/admin/get-cbk-users-list'
       },
       {
         id: 'ptpList',
         title: 'PTP List',
-        icon: <Circle size={12} />,
         navLink: '/admin/get-ptp-users-list'
       },
       {
         id: 'bptpList',
         title: 'BPTP List',
-        icon: <Circle size={12} />,
         navLink: '/admin/get-bptp-users-list'
       },
       {
         id: 'traceList',
         title: 'Trace List',
-        icon: <Circle size={12} />,
         navLink: '/admin/trace-history'
       }
     ]
@@ -266,7 +262,7 @@ export default [
         id: 'did',
         title: 'Did',
         icon: <Circle size={12} />,
-        navLink: '/admin/obd-did'
+        navLink: '/admin/obd/did'
       },
       {
         id: 'createCampaign',
@@ -325,7 +321,7 @@ export default [
         id: 'viewAttendance',
         title: 'View',
         icon: <Circle size={12} />,
-        navLink: '/admin/obd/view-attendance'
+        navLink: '/admin/view-attendance'
       },
       {
         id: 'workLocations',
@@ -413,16 +409,19 @@ export default [
       {
         id: 'notificationList',
         title: 'Notification List',
+        icon: <Circle size={12} />,
         navLink: '/admin/notifications'
       },
       {
         id: 'annoucement',
         title: 'Announcement',
+        icon: <Circle size={12} />,
         navLink: '/admin/announcement'
       },
       {
         id: 'appreciation',
         title: 'Appreciation',
+        icon: <Circle size={12} />,
         navLink: '/admin/appreciation'
       }
     ]
@@ -435,11 +434,13 @@ export default [
       {
         id: 'repoSearch',
         title: 'Repo Search',
+        icon: <Circle size={12} />,
         navLink: '/admin/repo-search'
       },
       {
         id: 'searchHistory',
         title: 'Search History',
+        icon: <Circle size={12} />,
         navLink: '/admin/repo-history'
       }
     ]
