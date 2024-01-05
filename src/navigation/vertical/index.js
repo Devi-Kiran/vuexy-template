@@ -9,21 +9,25 @@ export default [
       {
         id: 'dashboard',
         title: 'Dashboard',
+        icon: <Circle size={12} />,
         navLink: "/admin/dashboard"
       },
       {
         id: 'analysis',
         title: 'Analysis',
+        icon: <Circle size={12} />,
         navLink: "/admin/compare"
       },
       {
         id: 'searchCR',
         title: 'Search CR',
+        icon: <Circle size={12} />,
         navLink: "/admin/call-enquiry/call-recordings"
       },
       {
         id: 'dailer',
         title: 'Dailer',
+        icon: <Circle size={12} />,
         navLink: "/admin/dailer"
       }
     ]
@@ -36,13 +40,13 @@ export default [
       {
         id: 'viewPortfolios',
         title: 'View Portfolios',
-        icon: <Mail size={20} />,
+        icon: <Circle size={12} />,
         navLink: "/admin/call-manager"
       },
       {
         id: 'viewFOPList',
         title: 'View FOS List',
-        icon: <Mail size={20} />,
+        icon: <Circle size={12} />,
         navLink: "/admin/get-fos-users-list"
       }
     ]
@@ -55,31 +59,37 @@ export default [
       {
         id: 'posGrid',
         title: 'POS Grid',
+        icon: <Circle size={12} />,
         navLink: "/admin/pos-analysis"
       },
       {
         id: 'locationGrid',
         title: 'Location Grid',
+        icon: <Circle size={12} />,
         navLink: "/admin/location-grid-analysis"
       },
       {
         id: 'strikes',
         title: 'Strikes',
+        icon: <Circle size={12} />,
         navLink: "/admin/strikes"
       },
       {
         id: 'reviews',
         title: 'Reviews',
+        icon: <Circle size={12} />,
         navLink: "/admin/reviews"
       },
       {
         id: 'reminders',
         title: 'Reminders',
+        icon: <Circle size={12} />,
         navLink: "/admin/reminder-summary"
       },
       {
         id: 'fieldRemarks',
         title: 'Field Remarks',
+        icon: <Circle size={12} />,
         navLink: "/admin/field-remark-summary"
       }
     ]
@@ -92,7 +102,7 @@ export default [
       {
         id: "viewMilestone",
         title: "View",
-        icon: <Mail size={20} />,
+        icon: <Circle size={12} />,
         navLink: "/admin/view-milestone"
       }
     ]
@@ -142,21 +152,25 @@ export default [
       {
         id: 'cbkList',
         title: 'CBK List',
+        icon: <Circle size={12} />,
         navLink: '/admin/get-cbk-users-list'
       },
       {
         id: 'ptpList',
         title: 'PTP List',
+        icon: <Circle size={12} />,
         navLink: '/admin/get-ptp-users-list'
       },
       {
         id: 'bptpList',
         title: 'BPTP List',
+        icon: <Circle size={12} />,
         navLink: '/admin/get-bptp-users-list'
       },
       {
         id: 'traceList',
         title: 'Trace List',
+        icon: <Circle size={12} />,
         navLink: '/admin/trace-history'
       }
     ]
