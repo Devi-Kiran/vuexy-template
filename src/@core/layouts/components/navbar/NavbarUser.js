@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // ** Dropdowns Imports
 import { Fragment } from "react";
+import FullscreenButton from "../../../components/ametecs/FullscreenButton";
 
 import UserDropdown from "./UserDropdown";
 
@@ -59,35 +60,38 @@ const NavbarUser = (props) => {
         <div className="d-flex align-items-center">
           <Button.Ripple
             color="flat-secondary"
-            style={{padding: "5px", margin: "0px 2px"}}
+            style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowCallingList((prev) => !prev)}
           >
-            <PhoneCall size={20}/>
+            <PhoneCall size={20} />
           </Button.Ripple>
 
           <Button.Ripple
             color="flat-secondary"
-            style={{padding: "5px", margin: "0px 2px"}}
+            style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowOnlineUsers((prev) => !prev)}
           >
-            <Monitor size={20}/>
+            <Monitor size={20} />
           </Button.Ripple>
 
           <Button.Ripple
             color="flat-secondary"
-            style={{padding: "5px", margin: "0px 2px"}}
+            style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowOfflineUsers((prev) => !prev)}
           >
-            <EyeOff size={20}/>
+            <EyeOff size={20} />
           </Button.Ripple>
+
+          <FullscreenButton />
 
           <Button.Ripple
             color="flat-secondary"
-            style={{padding: "5px", margin: "0px 2px"}}
+            style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowNotifications((prev) => !prev)}
           >
-            <Bell size={20}/>
+            <Bell size={20} />
           </Button.Ripple>
+          
           <Modal
             isOpen={showCallingList}
             toggle={() => setShowCallingList((prev) => !prev)}

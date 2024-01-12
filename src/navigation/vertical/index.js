@@ -298,7 +298,7 @@ export default [
     icon: <Mail size={20} />,
     children: [
       {
-        id: ''
+        id: "adminstration"
       }
     ]
   },

@@ -38,7 +38,9 @@ const colourOptions = [
 
 function Dashboard() {
   const [tableView, setTableView] = useState(true);
-  const [fromDate, setFromDate] = useState(new Date().toISOString().split("T")[0]);
+  const [fromDate, setFromDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [toDate, setToDate] = useState(new Date().toISOString().split("T")[0]);
   const [source, setSource] = useState(colourOptions[0]);
   const [portfolio, setPortfolio] = useState(colourOptions[0]);
@@ -46,7 +48,6 @@ function Dashboard() {
   const [bucket, setBucket] = useState(colourOptions[0]);
   const [TCL, setTCL] = useState(colourOptions[0]);
   const [FOS, setFOS] = useState(colourOptions[0]);
-  console.log(fromDate, toDate);
 
   const dpCodes = [
     "RNR",
@@ -300,10 +301,21 @@ function Dashboard() {
 
   const filterHandler = (e) => {
     e.preventDefault();
-    console.log(fromDate, toDate, source, portfolio, group, bucket, TCL, FOS);
+    console.log(
+      fromDate,
+      toDate,
+      source.label,
+      portfolio.label,
+      group.label,
+      bucket.label,
+      TCL.label,
+      FOS.label
+    );
   };
 
   const filterResetHandler = () => {
+    setFromDate(new Date().toISOString().split("T")[0]);
+    setToDate(new Date().toISOString().split("T")[0]);
     setSource(colourOptions[0]);
     setPortfolio(colourOptions[0]);
     setGroup(colourOptions[0]);
