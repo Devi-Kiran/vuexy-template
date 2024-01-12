@@ -363,10 +363,10 @@ export default [
         navLink: '/admin/users'
       },
       {
-        id: 'clickToCall',
-        title: 'Click To Call',
+        id: 'click2Call',
+        title: 'Click2Call',
         icon: <Circle size={12} />,
-        navLink: '/admin/click-to-call'
+        navLink: '/admin/click2call'
       }
     ]
   },

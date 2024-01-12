@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import BreadCrumbs from '../../../../@core/components/breadcrumbs';
 
 function ByStaff() {
   return (
-    <div>ByStaff</div>
+    <div><BreadCrumbs breadCrumbTitle="Search Call Recordings" breadCrumbActive="Search Call Recordings"/>ByStaff</div>
   )
 }
 

@@ -15,17 +15,17 @@ import {
 import { PieChart, Table } from "react-feather";
 
 import Select from "react-select";
+import { Link } from "react-router-dom";
+import DataTable from "react-data-table-component";
+import { downloadExcelTable } from "../../../../utility/app/downloadExcelTable";
 import Flatpickr from "react-flatpickr";
 import StatsHorizontal from "@components/widgets/stats/StatsHorizontal";
-import DPCodeSummary from "../../../../@core/components/ametecs/dashboard/DPCodeSummary";
 import ChartjsBarChart from "../../../../@core/components/ametecs/dashboard/ChartjsBarChart";
 import ChartjsHorizontalBarChart from "../../../../@core/components/ametecs/dashboard/ChartjsHorizontalBar";
 import ChartjsRadarChart from "../../../../@core/components/ametecs/dashboard/ChartjsDoughnutChart";
-
+import BreadCrumbs from "../../../../@core/components/breadcrumbs";
 
 import "@styles/react/libs/flatpickr/flatpickr.scss";
-
-import { selectThemeColors } from "@utils";
 
 const colourOptions = [
   { value: "select", label: "Select" },
@@ -38,13 +38,15 @@ const colourOptions = [
 
 function Dashboard() {
   const [tableView, setTableView] = useState(true);
-  const [picker, setPicker] = useState(new Date().toISOString().split("T")[0]);
-  const [source, setSource] = useState(colourOptions[0].label);
-  const [portfolio, setPortfolio] = useState(colourOptions[0].label);
-  const [group, setGroup] = useState(colourOptions[0].label);
-  const [bucket, setBucket] = useState(colourOptions[0].label);
-  const [TCL, setTCL] = useState(colourOptions[0].label);
-  const [FOS, setFOS] = useState(colourOptions[0].label);
+  const [fromDate, setFromDate] = useState(new Date().toISOString().split("T")[0]);
+  const [toDate, setToDate] = useState(new Date().toISOString().split("T")[0]);
+  const [source, setSource] = useState(colourOptions[0]);
+  const [portfolio, setPortfolio] = useState(colourOptions[0]);
+  const [group, setGroup] = useState(colourOptions[0]);
+  const [bucket, setBucket] = useState(colourOptions[0]);
+  const [TCL, setTCL] = useState(colourOptions[0]);
+  const [FOS, setFOS] = useState(colourOptions[0]);
+  console.log(fromDate, toDate);
 
   const dpCodes = [
     "RNR",
@@ -298,91 +300,103 @@ function Dashboard() {
 
   const filterHandler = (e) => {
     e.preventDefault();
-    console.log(picker, source, portfolio, group, bucket, TCL, FOS);
+    console.log(fromDate, toDate, source, portfolio, group, bucket, TCL, FOS);
   };
 
   const filterResetHandler = () => {
-    setPicker(new Date().toISOString().split("T")[0]);
-    setSource(colourOptions[0].label);
-    setPortfolio(colourOptions[0].label);
-    setGroup(colourOptions[0].label);
-    setBucket(colourOptions[0].label);
-    setTCL(colourOptions[0].label);
-    setFOS(colourOptions[0].label);
+    setSource(colourOptions[0]);
+    setPortfolio(colourOptions[0]);
+    setGroup(colourOptions[0]);
+    setBucket(colourOptions[0]);
+    setTCL(colourOptions[0]);
+    setFOS(colourOptions[0]);
   };
 
   return (
     <div>
+      <BreadCrumbs breadCrumbTitle="Dashboard" breadCrumbActive="Dashboard" />
       {/* card container start*/}
       <div>
         <Row>
           <Col lg="3" sm="6">
-            <StatsHorizontal
-              dpCode="PTP"
-              color="primary"
-              stats={`0`}
-              statTitle="Promise To Pay"
-            />
+            <Link to="/admin/get-ptp-Users-list" className="text-dark">
+              <StatsHorizontal
+                dpCode="PTP"
+                color="primary"
+                stats={`0`}
+                statTitle="Promise To Pay"
+              />
+            </Link>
           </Col>
           <Col lg="3" sm="6">
-            <StatsHorizontal
-              dpCode="CBK"
-              color="success"
-              stats={`0`}
-              statTitle="Call Back"
-            />
+            <Link to="/admin/get-cbk-Users-list">
+              <StatsHorizontal
+                dpCode="CBK"
+                color="success"
+                stats={`0`}
+                statTitle="Call Back"
+              />
+            </Link>
           </Col>
           <Col lg="3" sm="6">
-            <StatsHorizontal
-              dpCode="BPTP"
-              color="danger"
-              stats={`0`}
-              statTitle="Broken Promise To Pay"
-            />
+            <Link to="/admin/get-bptp-Users-list" className="text-dark">
+              <StatsHorizontal
+                dpCode="BPTP"
+                color="danger"
+                stats={`0`}
+                statTitle="Broken Promise To Pay"
+              />
+            </Link>
           </Col>
           <Col lg="3" sm="6">
-            <StatsHorizontal
-              dpCode="LPTP"
-              color="warning"
-              stats={`0`}
-              statTitle="Long Promise To Pay"
-            />
+            <Link to="/admin/get-ptp-Users-list" className="text-dark">
+              <StatsHorizontal
+                dpCode="LPTP"
+                color="warning"
+                stats={`0`}
+                statTitle="Long Promise To Pay"
+              />
+            </Link>
           </Col>
         </Row>
       </div>
       {/* card container end*/}
 
       <Card>
-        {/* <CardHeader>
-        <CardTitle tag='h4'>Multiple Column</CardTitle>
-      </CardHeader> */}
+        <CardHeader>
+          <CardTitle tag="h4">Filter</CardTitle>
+        </CardHeader>
 
         <CardBody>
           <Form>
             <Row>
               <Col md="4" xs="6">
                 <FormGroup>
-                  <Label for="startDate">From</Label>
+                  <Label for="fromDate">From</Label>
                   <Flatpickr
                     className="form-control"
-                    value={picker}
-                    onChange={(date) =>
-                      setPicker(new Date(date).toISOString().split("T")[0])
-                    }
-                    id="startDate"
+                    value={fromDate}
+                    onChange={(dates) => {
+                      const selectedDate = new Date(dates[0]);
+                      selectedDate.setDate(selectedDate.getDate() + 1);
+                      setFromDate(selectedDate.toISOString().split("T")[0]);
+                    }}
+                    id="fromtDate"
                   />
                 </FormGroup>
               </Col>
               <Col md="4" xs="6">
                 <FormGroup>
-                  <Label for="endDate">To</Label>
+                  <Label for="toDate">To</Label>
                   <Flatpickr
                     className="form-control"
-                    value={picker}
-                    onChange={(date) =>
-                      setPicker(new Date(date).toISOString().split("T")[0])
-                    }
-                    id="endDate"
+                    value={toDate}
+                    onChange={(dates) => {
+                      const selectedDate = new Date(dates[0]);
+                      selectedDate.setDate(selectedDate.getDate() + 1);
+                      setToDate(selectedDate.toISOString().split("T")[0]);
+                    }}
+                    id="toDate"
                   />
                 </FormGroup>
               </Col>
@@ -393,9 +407,10 @@ function Dashboard() {
                     id="source"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={source}
                     options={colourOptions}
-                    onChange={(e) => setSource(e.value)}
+                    value={source}
+                    onChange={(e) => setSource(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -407,9 +422,10 @@ function Dashboard() {
                     id="portfolio"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={portfolio}
                     options={colourOptions}
-                    onChange={(e) => setPortfolio(e.value)}
+                    value={portfolio}
+                    onChange={(e) => setPortfolio(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -418,13 +434,13 @@ function Dashboard() {
                 <FormGroup>
                   <Label for="group">Select Group</Label>
                   <Select
-                    //theme={selectThemeColors}
                     id="group"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={colourOptions}
                     options={colourOptions}
-                    onChange={(e) => setGroup(e.value)}
+                    value={group}
+                    onChange={(e) => setGroup(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -433,13 +449,13 @@ function Dashboard() {
                 <FormGroup>
                   <Label for="bucket">Select Bucket</Label>
                   <Select
-                    //theme={selectThemeColors}
                     id="bucket"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={colourOptions}
                     options={colourOptions}
-                    onChange={(e) => setBucket(e.value)}
+                    value={bucket}
+                    onChange={(e) => setBucket(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -448,13 +464,13 @@ function Dashboard() {
                 <FormGroup>
                   <Label for="TCL">Select TCL</Label>
                   <Select
-                    //theme={selectThemeColors}
                     id="TCL"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={colourOptions}
                     options={colourOptions}
-                    onChange={(e) => setTCL(e.value)}
+                    value={TCL}
+                    onChange={(e) => setTCL(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -463,13 +479,13 @@ function Dashboard() {
                 <FormGroup>
                   <Label for="FOS">Select FOS</Label>
                   <Select
-                    //theme={selectThemeColors}
                     id="FOS"
                     className="react-select"
                     classNamePrefix="select"
-                    defaultValue={colourOptions[0]}
+                    defaultValue={colourOptions}
                     options={colourOptions}
-                    onChange={(e) => setFOS(e.value)}
+                    value={FOS}
+                    onChange={(e) => setFOS(e)}
                     isClearable={false}
                   />
                 </FormGroup>
@@ -534,7 +550,7 @@ function Dashboard() {
               <div style={{ width: "105px" }} className="">
                 Start Date :
               </div>
-              <div className="flex-grow-1">{picker}</div>
+              <div className="flex-grow-1">{fromDate}</div>
             </div>
           </Col>
           <Col xs="12" sm="6" md="4" lg="3">
@@ -542,7 +558,7 @@ function Dashboard() {
               <div style={{ width: "105px" }} className="">
                 End Date :
               </div>
-              <div className="flex-grow-1 text-capitalize">{picker}</div>
+              <div className="flex-grow-1 text-capitalize">{toDate}</div>
             </div>
           </Col>
           <Col xs="12" sm="6" md="4" lg="3">
@@ -551,7 +567,7 @@ function Dashboard() {
                 Source :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {source == "Select" ? "All" : source}
+                {source.label == "Select" ? "All" : source.label}
               </div>
             </div>
           </Col>
@@ -561,7 +577,7 @@ function Dashboard() {
                 Portfolio :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {portfolio == "Select" ? "All" : portfolio}
+                {portfolio.label == "Select" ? "All" : portfolio.label}
               </div>
             </div>
           </Col>
@@ -571,7 +587,7 @@ function Dashboard() {
                 Group :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {group == "Select" ? "All" : group}
+                {group.label == "Select" ? "All" : group.label}
               </div>
             </div>
           </Col>
@@ -581,7 +597,7 @@ function Dashboard() {
                 Bucket :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {bucket == "Select" ? "All" : bucket}
+                {bucket.label == "Select" ? "All" : bucket.label}
               </div>
             </div>
           </Col>
@@ -591,7 +607,7 @@ function Dashboard() {
                 TCL :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {TCL == "Select" ? "All" : TCL}
+                {TCL.label == "Select" ? "All" : TCL.label}
               </div>
             </div>
           </Col>
@@ -601,7 +617,7 @@ function Dashboard() {
                 FOS :
               </div>
               <div className="flex-grow-1 text-capitalize">
-                {FOS == "Select" ? "All" : FOS}
+                {FOS.label == "Select" ? "All" : FOS.label}
               </div>
             </div>
           </Col>
@@ -614,64 +630,169 @@ function Dashboard() {
           <Row>
             <Col lg="6">
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="DP Code Summary - Flows"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    DP Code Summary - Flows
+                  </span>
+                  <Button.Ripple
+                    onClick={() => downloadExcelTable(DPCodesSummaryFlowsData)}
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
                   columns={DPCodesSummaryFlowsColumns}
                   data={DPCodesSummaryFlowsData}
+                  noHeader
+                  responsive
                   fixedHeader={true}
                   fixedHeaderScrollHeight="300px"
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
 
             <Col lg="6">
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="DP Code Summary - Vintage"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    DP Code Summary - Vintage
+                  </span>
+                  <Button.Ripple
+                    onClick={() =>
+                      downloadExcelTable(DPCodesSummaryVintageData)
+                    }
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
                   columns={DPCodesSummaryVintageColumns}
                   data={DPCodesSummaryVintageData}
+                  noHeader
+                  responsive
                   fixedHeader={true}
                   fixedHeaderScrollHeight="300px"
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
 
             <Col lg="6">
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="Collection - Flows"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    Collection - Flows
+                  </span>
+                  <Button.Ripple
+                    onClick={() => downloadExcelTable(collectionFlowsData)}
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
                   columns={collectionColumns}
                   data={collectionFlowsData}
+                  noHeader
+                  responsive
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
 
             <Col lg="6">
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="Collection - Vintage"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    Collection - Vintage
+                  </span>
+                  <Button.Ripple
+                    onClick={() => downloadExcelTable(collectionVintageData)}
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
+                  title="Desserts"
                   columns={collectionColumns}
                   data={collectionVintageData}
+                  noHeader
+                  responsive
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
 
             <Col>
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="Resolution Status"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    Resolution Status
+                  </span>
+                  <Button.Ripple
+                    onClick={() => downloadExcelTable(resolutionStatusData)}
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
                   columns={resolutionStatusColumns}
                   data={resolutionStatusData}
+                  noHeader
+                  responsive
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
 
             <Col>
               <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="Portfolio List"
+                <div className="mb-1 d-flex justify-content-between align-items-center">
+                  <span
+                    className="font-weight-bold"
+                    style={{ fontSize: "18px" }}
+                  >
+                    Portfolio List
+                  </span>
+                  <Button.Ripple
+                    onClick={() => downloadExcelTable(portfolioListData)}
+                    color="primary"
+                    size="sm"
+                  >
+                    Excel
+                  </Button.Ripple>
+                </div>
+                <DataTable
                   columns={portfolioListColumns}
                   data={portfolioListData}
+                  noHeader
+                  responsive
+                  highlightOnHover={true}
                 />
               </div>
             </Col>
@@ -684,31 +805,45 @@ function Dashboard() {
               <ChartjsBarChart />
             </Col>
             <Col xs="12" md="6">
-              <ChartjsHorizontalBarChart/>     
+              <ChartjsHorizontalBarChart />
             </Col>
             <Col xs="12" md="6">
-              <ChartjsHorizontalBarChart/>     
+              <ChartjsHorizontalBarChart />
             </Col>
             <Col xs="12" md="4">
-              <ChartjsRadarChart/>
+              <ChartjsRadarChart />
             </Col>
             <Col xs="12" md="4">
-              <ChartjsRadarChart/>
+              <ChartjsRadarChart />
             </Col>
             <Col xs="12" md="4">
-              <ChartjsRadarChart/>
+              <ChartjsRadarChart />
             </Col>
             <Col xs="12">
               <ChartjsBarChart />
             </Col>
           </Row>
           <div className="mb-4">
-                <DPCodeSummary
-                  tableTitle="Portfolio List"
-                  columns={portfolioListColumns}
-                  data={portfolioListData}
-                />
-              </div>
+            <div className="mb-1 d-flex justify-content-between align-items-center">
+              <span className="font-weight-bold" style={{ fontSize: "18px" }}>
+                Portfolio List
+              </span>
+              <Button.Ripple
+                onClick={() => downloadExcelTable(portfolioListData)}
+                color="primary"
+                size="sm"
+              >
+                Excel
+              </Button.Ripple>
+            </div>
+            <DataTable
+              columns={portfolioListColumns}
+              data={portfolioListData}
+              noHeader
+              responsive
+              highlightOnHover={true}
+            />
+          </div>
         </div>
       )}
     </div>

@@ -22,13 +22,13 @@ const BreadCrumbs = props => {
       <div className='content-header-left col-md-9 col-12 mb-2'>
         <div className='row breadcrumbs-top'>
           <div className='col-12'>
-            {breadCrumbTitle ? <h2 className='content-header-title float-left mb-0'>{breadCrumbTitle}</h2> : ''}
+            {breadCrumbTitle ? <h2 style={{fontSize: "20px", color: "black"}} className='content-header-title float-left mb-0'>{breadCrumbTitle}</h2> : ''}
             <div className='breadcrumb-wrapper vs-breadcrumbs d-sm-block d-none col-12'>
               <Breadcrumb>
                 <BreadcrumbItem tag='li'>
-                  <Link to='/'>Home</Link>
+                  <Link to='/' className="font-weight-bold">Home</Link>
                 </BreadcrumbItem>
-                <BreadcrumbItem tag='li' className='text-primary'>
+                {/* <BreadcrumbItem tag='li' className='text-primary'>
                   {breadCrumbParent}
                 </BreadcrumbItem>
                 {breadCrumbParent2 ? (
@@ -44,8 +44,8 @@ const BreadCrumbs = props => {
                   </BreadcrumbItem>
                 ) : (
                   ''
-                )}
-                <BreadcrumbItem tag='li' active>
+                )} */}
+                <BreadcrumbItem tag='li' active className="font-weight-bold">
                   {breadCrumbActive}
                 </BreadcrumbItem>
               </Breadcrumb>
@@ -53,7 +53,7 @@ const BreadCrumbs = props => {
           </div>
         </div>
       </div>
-      <div className='content-header-right text-md-right col-md-3 col-12 d-md-block d-none'>
+      {/* <div className='content-header-right text-md-right col-md-3 col-12 d-md-block d-none'>
         <div className='form-group breadcrum-right dropdown'>
           <UncontrolledButtonDropdown>
             <DropdownToggle color='primary' size='sm' className='btn-icon btn-round dropdown-toggle'>
@@ -79,7 +79,7 @@ const BreadCrumbs = props => {
             </DropdownMenu>
           </UncontrolledButtonDropdown>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

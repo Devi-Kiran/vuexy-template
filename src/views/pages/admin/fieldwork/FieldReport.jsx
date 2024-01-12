@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import BreadCrumbs from '../../../../@core/components/breadcrumbs';
 
 function FieldReport() {
   return (
-    <div>FieldReport</div>
+    <div>
+      <BreadCrumbs breadCrumbTitle="Search Call Recordings" breadCrumbActive="Search Call Recordings"/>FieldReport</div>
   )
 }
 

@@ -209,8 +209,8 @@ const Routes = [
     component: lazy(() => import('../../views/pages/admin/users'))
   },
   {
-    path: '/admin/click-to-call',
-    component: lazy(() => import('../../views/pages/admin/users/ClickToCall'))
+    path: '/admin/click2call',
+    component: lazy(() => import('../../views/pages/admin/users/Click2Call'))
   },
   //////////Settings Section////////////
   {
