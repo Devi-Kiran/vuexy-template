@@ -1,22 +1,24 @@
-// ** Router Import
-// import Router from './router/Router';
+import React, { useState, useEffect } from "react";
+import Router from "./router/Router";
+import OfflineConponent from "./@core/components/ametecs/OfflineConponent";
 
-// const App = props => <Router />
+const App = (props) => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-// export default App
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
 
-import Router from './router/Router';
-import OfflineConponent from './@core/components/ametecs/OfflineConponent';
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
 
-const App = props => {
-    const isOnline = navigator.onLine;
-    // console.log(isOnline)
-    return (
-        <>
-            {isOnline ? <Router/> : <OfflineConponent/>}
-        </>
-    )
-}
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+  return <>{isOnline ? <Router /> : <OfflineConponent />}</>;
+};
 
-export default App
-
+export default App;
