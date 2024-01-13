@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // ** Dropdowns Imports
 import { Fragment } from "react";
-import FullscreenButton from "../../../components/ametecs/FullscreenButton";
 
 import UserDropdown from "./UserDropdown";
 
@@ -15,11 +14,20 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Badge,
 } from "reactstrap";
 
-import { PhoneCall, Bell, Monitor, EyeOff } from "react-feather";
+import {
+  PhoneCall,
+  Bell,
+  Monitor,
+  EyeOff,
+  Maximize,
+  Minimize,
+} from "react-feather";
 
 const NavbarUser = (props) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [showOnlineUsers, setShowOnlineUsers] = useState(false);
   const [showOfflineUsers, setShowOfflineUsers] = useState(false);
   const [showCallingList, setShowCallingList] = useState(false);
@@ -36,6 +44,25 @@ const NavbarUser = (props) => {
       return <Moon className="ficon" onClick={() => setSkin("dark")} />;
     }
   };
+
+  const handleFullscreenChange = () => {
+    setIsFullscreen(document.fullscreenElement !== null);
+  };
+
+  const handleFullscreenToggle = () => {
+    if (!isFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, [isFullscreen]);
 
   return (
     <Fragment>
@@ -68,30 +95,69 @@ const NavbarUser = (props) => {
 
           <Button.Ripple
             color="flat-secondary"
+            className="overflow-visible position-relative"
             style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowOnlineUsers((prev) => !prev)}
           >
-            <Monitor size={20} />
+            <Monitor size={20} className="ficon"/>
+            {1 > 0 ? (
+              <Badge
+                pill
+                color="white"
+                className="badge-up text-danger"
+                style={{ top: "-6px", right: "-4px" }}
+              >
+                10
+              </Badge>
+            ) : null}
           </Button.Ripple>
 
           <Button.Ripple
             color="flat-secondary"
+            className="overflow-visible position-relative"
             style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowOfflineUsers((prev) => !prev)}
           >
-            <EyeOff size={20} />
+            <EyeOff size={20} className="ficon"/>
+            {1 > 0 ? (
+              <Badge
+                pill
+                color="white"
+                className="badge-up text-danger"
+                style={{ top: "-6px", right: "-4px" }}
+              >
+                2
+              </Badge>
+            ) : null}
           </Button.Ripple>
-
-          <FullscreenButton />
 
           <Button.Ripple
             color="flat-secondary"
             style={{ padding: "5px", margin: "0px 2px" }}
+            onClick={handleFullscreenToggle}
+          >
+            {isFullscreen ? <Minimize size="20" /> : <Maximize size="20" />}
+          </Button.Ripple>
+
+          <Button.Ripple
+            color="flat-secondary"
+            className="overflow-visible  position-relative"
+            style={{ padding: "5px", margin: "0px 2px" }}
             onClick={() => setShowNotifications((prev) => !prev)}
           >
-            <Bell size={20} />
+            <Bell size={20} className="ficon" />
+            {1 > 0 ? (
+              <Badge
+                pill
+                color="danger"
+                className="badge-up"
+                style={{ top: "-6px", right: "-4px" }}
+              >
+                2
+              </Badge>
+            ) : null}
           </Button.Ripple>
-          
+
           <Modal
             isOpen={showCallingList}
             toggle={() => setShowCallingList((prev) => !prev)}
