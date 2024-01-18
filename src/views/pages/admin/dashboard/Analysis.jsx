@@ -9,14 +9,14 @@ import {
   FormGroup,
   Row,
   Col,
-  Input,
   Form,
   Button,
   Label,
 } from "reactstrap";
 import Select from "react-select";
 import Flatpickr from "react-flatpickr";
-import DataTable from "react-data-table-component";
+import DataTable, { createTheme } from "react-data-table-component";
+import { useSkin } from "@hooks/useSkin";
 
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 
@@ -29,7 +29,35 @@ const colourOptions = [
   { value: "orange", label: "Orange" },
 ];
 
+createTheme(
+  "solarized",
+  {
+    text: {
+      primary: "#D0D2D6",
+      secondary: "#2aa198",
+    },
+    background: {
+      default: "#283046",
+    },
+    context: {
+      background: "#cb4b16",
+      text: "#FFFFFF",
+    },
+    divider: {
+      default: "#82868b",
+    },
+    action: {
+      button: "rgba(0,0,0,.54)",
+      hover: "rgba(0,0,0,.08)",
+      disabled: "rgba(0,0,0,.12)",
+    },
+  },
+  "dark"
+);
+
 function Analysis() {
+  const [skin, setSkin] = useSkin();
+  console.log(skin);
   const [fromDate, setFromDate] = useState(
     new Date().toISOString().split("T")[0]
   );
@@ -402,7 +430,6 @@ function Analysis() {
         </CardBody>
       </Card>
 
-      
       {/* filters container start */}
       <div className="bg-primary text-white py-1 px-1 px-md-2 rounded font-weight-bold mb-2">
         <Row>
@@ -507,91 +534,85 @@ function Analysis() {
       {/* filters container end */}
 
       <div>
-          <Row>
-            <Col xs="12">
-              <div className="mb-4">
-                <div className="mb-1 d-flex justify-content-between align-items-center">
-                  <span
-                    className="font-weight-bold"
-                    style={{ fontSize: "18px" }}
-                  >
-                    DP Code Summary
-                  </span>
-                  <Button.Ripple
-                    onClick={() => downloadExcelTable(DPCodesSummaryFlowsData)}
-                    color="primary"
-                    size="sm"
-                  >
-                    Excel
-                  </Button.Ripple>
-                </div>
-                <DataTable
-                  columns={DPCodesSummaryFlowsColumns}
-                  data={DPCodesSummaryFlowsData}
-                  noHeader
-                  responsive
-                  fixedHeader={true}
-                  fixedHeaderScrollHeight="300px"
-                  highlightOnHover={true}
-                />
+        <Row>
+          <Col xs="12">
+            <div className="mb-4">
+              <div className="mb-1 d-flex justify-content-between align-items-center">
+                <span className="font-weight-bold" style={{ fontSize: "18px" }}>
+                  DP Code Summary
+                </span>
+                <Button.Ripple
+                  onClick={() => downloadExcelTable(DPCodesSummaryFlowsData)}
+                  color="primary"
+                  size="sm"
+                >
+                  Excel
+                </Button.Ripple>
               </div>
-            </Col>
+              <DataTable
+                columns={DPCodesSummaryFlowsColumns}
+                data={DPCodesSummaryFlowsData}
+                noHeader
+                responsive
+                fixedHeader={true}
+                theme={skin == "light" ? "" : "solarized"}
+                fixedHeaderScrollHeight="300px"
+                highlightOnHover={true}
+              />
+            </div>
+          </Col>
 
-            <Col>
-              <div className="mb-4">
-                <div className="mb-1 d-flex justify-content-between align-items-center">
-                  <span
-                    className="font-weight-bold"
-                    style={{ fontSize: "18px" }}
-                  >
-                    Resolution Status
-                  </span>
-                  <Button.Ripple
-                    onClick={() => downloadExcelTable(resolutionStatusData)}
-                    color="primary"
-                    size="sm"
-                  >
-                    Excel
-                  </Button.Ripple>
-                </div>
-                <DataTable
-                  columns={resolutionStatusColumns}
-                  data={resolutionStatusData}
-                  noHeader
-                  responsive
-                  highlightOnHover={true}
-                />
+          <Col>
+            <div className="mb-4">
+              <div className="mb-1 d-flex justify-content-between align-items-center">
+                <span className="font-weight-bold" style={{ fontSize: "18px" }}>
+                  Resolution Status
+                </span>
+                <Button.Ripple
+                  onClick={() => downloadExcelTable(resolutionStatusData)}
+                  color="primary"
+                  size="sm"
+                >
+                  Excel
+                </Button.Ripple>
               </div>
-            </Col>
+              <DataTable
+                columns={resolutionStatusColumns}
+                data={resolutionStatusData}
+                noHeader
+                responsive
+                theme={skin == "light" ? "" : "solarized"}
+                highlightOnHover={true}
+              />
+            </div>
+          </Col>
 
-            <Col lg="6">
-              <div className="mb-4">
-                <div className="mb-1 d-flex justify-content-between align-items-center">
-                  <span
-                    className="font-weight-bold"
-                    style={{ fontSize: "18px" }}
-                  >
-                    Collection
-                  </span>
-                  <Button.Ripple
-                    onClick={() => downloadExcelTable(collectionFlowsData)}
-                    color="primary"
-                    size="sm"
-                  >
-                    Excel
-                  </Button.Ripple>
-                </div>
-                <DataTable
-                  columns={collectionColumns}
-                  data={collectionFlowsData}
-                  noHeader
-                  responsive
-                  highlightOnHover={true}
-                />
+          <Col lg="6">
+            <div className="mb-4">
+              <div className="mb-1 d-flex justify-content-between align-items-center">
+                <span className="font-weight-bold" style={{ fontSize: "18px" }}>
+                  Collection
+                </span>
+                <Button.Ripple
+                  onClick={() => downloadExcelTable(collectionFlowsData)}
+                  color="primary"
+                  size="sm"
+                >
+                  Excel
+                </Button.Ripple>
               </div>
-            </Col>
-          </Row>
-        </div>
+              <DataTable
+                columns={collectionColumns}
+                data={collectionFlowsData}
+                noHeader
+                responsive
+                theme={skin == "light" ? "" : "solarized"}
+                highlightOnHover={true}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import BreadCrumbs from "../../../../@core/components/breadcrumbs";
+import ViewPortfolioCard from '../../../../@core/components/ametecs/viewPortfolios/ViewPortfolioCard';
 
 function ViewPortfolio() {
   return (
-    <div>ViewPortfolio</div>
+    <div>
+      <BreadCrumbs breadCrumbTitle="View Portfolios" breadCrumbActive="View Portfolios" />
+      <ViewPortfolioCard/>
+      <ViewPortfolioCard/>
+      <ViewPortfolioCard/>
+      <ViewPortfolioCard/>
+      <ViewPortfolioCard/>
+      <ViewPortfolioCard/>
+    </div>
   )
 }
 
