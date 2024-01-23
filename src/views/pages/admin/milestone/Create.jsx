@@ -5,7 +5,7 @@ import Select from "react-select";
 import DataTable from "react-data-table-component";
 import { Search } from "react-feather";
 import { FormGroup, Form, Button, Input, Label } from "reactstrap";
-import TargetPercentageInput from "../../../../@core/components/ametecs/viewPortfolios/createMilestone/TargetPercentageInput";
+import TargetPercentageInput from "../../../../@core/components/ametecs/createMilestone/TargetPercentageInput";
 
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 
@@ -21,49 +21,93 @@ const colourOptions = [
 function Create() {
   const [portfolio, setPortfolio] = useState(colourOptions[0]);
   const [data, setData] = useState({});
-
-  const targetPercentageGrabber = (obj) => {
-    setData(obj);
-  };
-
-  const createMilestoneData = [
+  // const milestoneTableData = [
+  //   {
+  //     milestone: "2021",
+  //     startDate: "55",
+  //     endDate: "66",
+  //     targetPercentage: "93",
+  //     POS: data.POS,
+  //     leads: data.leads,
+  //     balance: data.balance,
+  //     balancePOS: data.balancePOS,
+  //   },
+  //   {
+  //     milestone: "2022",
+  //     startDate: "55",
+  //     endDate: "63",
+  //     targetPercentage: "993",
+  //     POS: data.POS,
+  //     leads: data.leads,
+  //     balance: data.balance,
+  //     balancePOS: data.balancePOS,
+  //   },
+  //   {
+  //     milestone: "2023",
+  //     startDate: "56",
+  //     endDate: "66",
+  //     targetPercentage: "993",
+  //     POS: data.POS,
+  //     leads: data.leads,
+  //     balance: data.balance,
+  //     balancePOS: data.balancePOS,
+  //   }
+  // ];
+  const milestoneTableData = [
     {
       milestone: "2021",
       startDate: "55",
       endDate: "66",
-      targetPercentage: "993",
-      POS: data.POS,
-      leads: data.leads,
-      balance: data.balance,
-      balancePOS: data.balancePOS,
+      targetPercentage: "",
+      POS: "",
+      leads: "",
+      balance: "",
+      balancePOS: "",
     },
     {
-      milestone: "2021",
+      milestone: "2022",
       startDate: "55",
-      endDate: "66",
-      targetPercentage: "993",
-      POS: data.POS,
-      leads: data.leads,
-      balance: data.balance,
-      balancePOS: data.balancePOS,
+      endDate: "63",
+      targetPercentage: "",
+      POS: "",
+      leads: "",
+      balance: "",
+      balancePOS: "",
     },
     {
-      milestone: "2021",
-      startDate: "55",
+      milestone: "2023",
+      startDate: "56",
       endDate: "66",
-      targetPercentage: "993",
-      POS: data.POS,
-      leads: data.leads,
-      balance: data.balance,
-      balancePOS: data.balancePOS,
+      targetPercentage: "",
+      POS: "",
+      leads: "",
+      balance: "",
+      balancePOS: "",
     }
   ];
+  const [createMilestoneTableData, setCreateMilestoneTableData] = useState(milestoneTableData);
+
+  const targetPercentageGrabber = (obj) => {
+    const updatedData = createMilestoneTableData.map(data => {
+      if(data.milestone == obj.milestone) {
+        return obj;
+      } else {
+        return data;
+      }
+    });
+
+    setCreateMilestoneTableData(updatedData)
+  };
+
+  useEffect(() => {
+    
+  },[data])
 
   useEffect(() => {
     // console.log("changed portyfolio")
   }, [portfolio]);
 
-  const createMilestoneColumns = [
+  const milestoneTableColumns = [
     {
       name: "Milestone",
       selector: (row) => row.milestone,
@@ -81,9 +125,10 @@ function Create() {
       selector: (row) => row.action,
       button: true,
       cell: (row) => {
+        // console.log(row)
         return (
           <>
-            <TargetPercentageInput
+            <TargetPercentageInput data={row}
               targetPercentageGrabber={targetPercentageGrabber}
             />
           </>
@@ -134,8 +179,8 @@ function Create() {
 
       <div>
         <DataTable
-          columns={createMilestoneColumns}
-          data={createMilestoneData}
+          columns={milestoneTableColumns}
+          data={createMilestoneTableData}
           noHeader
           responsive
           pagination
