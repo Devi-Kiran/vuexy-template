@@ -22,6 +22,10 @@ const Routes = [
     component: lazy(() => import('../../views/pages/admin/dashboard/Analysis'))
   },
   {
+    path: '/admin/search',
+    component: lazy(() => import('../../views/pages/admin/dashboard/SearchAC'))
+  },
+  {
     path: '/admin/call-enquiry/call-recordings',
     component: lazy(() => import('../../views/pages/admin/dashboard/SearchCR'))
   },
@@ -65,8 +69,16 @@ const Routes = [
   },
   ///////////////Milestone Section//////////////
   {
+    path: '/admin/create-milestone',
+    component: lazy(() => import('../../views/pages/admin/milestone/Create'))
+  },
+  {
     path: '/admin/view-milestone',
-    component: lazy(() => import('../../views/pages/admin/milestone'))
+    component: lazy(() => import('../../views/pages/admin/milestone/View'))
+  },
+  {
+    path: '/admin/edit-milestone',
+    component: lazy(() => import('../../views/pages/admin/milestone/EditMilestone'))
   },
   ///////////////Fieldwork Section//////////////
   {

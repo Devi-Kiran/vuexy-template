@@ -19,6 +19,12 @@ export default [
         navLink: "/admin/compare"
       },
       {
+        id: 'searchAC',
+        title: 'Search AC',
+        icon: <Circle size={12} />,
+        navLink: "/admin/search"
+      },
+      {
         id: 'searchCR',
         title: 'Search CR',
         icon: <Circle size={12} />,
@@ -99,6 +105,12 @@ export default [
     title: "Milestone",
     icon: <Mail size={20} />,
     children: [
+      {
+        id: "createMilestone",
+        title: "Create",
+        icon: <Circle size={12} />,
+        navLink: "/admin/create-milestone"
+      },
       {
         id: "viewMilestone",
         title: "View",

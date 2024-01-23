@@ -121,8 +121,7 @@ function Reviews() {
   const reviewsTableColumns = [
     {
       name: "ID",
-      selector: (row) => row.id,
-      sortable: true,
+      selector: (row) => row.id
     },
     {
       name: "Customer First Name",
