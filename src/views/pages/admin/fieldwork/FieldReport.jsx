@@ -34,58 +34,48 @@ function FieldReport() {
   const reviewsTableData = [
     {
       id: "2021",
-      customerFirstName: "ka",
-      customerLastName: "bandaru",
-      DPCode: "NC",
-      fieldVisitStatus: "Not Required",
-      customerMobile: "7288097613",
-      portfolio: "HDFC Business Loan",
-      allocatedTo: "KA",
-      FOS: "ka",
-      status: "actioned",
-      followupDate: "2023-11-30 18:32:00",
-      reviewAddedBy: "2024-01-16 12:15:32",
-      review: "34",
-      reviewDate: "7 days",
-      remarks: "finacial issues",
-      FOSRemarks: "ka",
+      name: "KA",
+      role: "tester",
+      mobile: "7288097613",
+      loginTime: "2023-11-30 18:32:00",
+      latestAddress: "NC",
+      latestTrackTime: "12:15:32",
+      totalVisits: "33",
+      leadID: "837",
     },
     {
-      id: "2027",
-      customerFirstName: "ka",
-      customerLastName: "bandaru",
-      DPCode: "NC",
-      fieldVisitStatus: "Not Required",
-      customerMobile: "7288097613",
-      portfolio: "HDFC Business Loan",
-      allocatedTo: "KA",
-      FOS: "ka",
-      status: "actioned",
-      followupDate: "2023-11-30 18:32:00",
-      reviewAddedBy: "2024-01-16 12:15:32",
-      review: "33",
-      reviewDate: "2 days",
-      remarks: "finacial issues",
-      FOSRemarks: "ka",
+      id: "2022",
+      name: "Ak",
+      role: "backend",
+      mobile: "7288097613",
+      loginTime: "2023-11-30 18:32:00",
+      latestAddress: "NC",
+      latestTrackTime: "12:15:32",
+      totalVisits: "33",
+      leadID: "824",
     },
     {
-      id: "2025",
-      customerFirstName: "ak",
-      customerLastName: "bonapatti",
-      DPCode: "CN",
-      fieldVisitStatus: "Required",
-      customerMobile: "9392018271",
-      portfolio: "HDFC Business Loan",
-      allocatedTo: "AK",
-      FOS: "AK",
-      status: "unactioned",
-      followupDate: "2023-11-30",
-      reviewAddedBy: "2024-01-16 12:15:32",
-      review: "34",
-      reviewDate: "7 days",
-      remarks: "bank issues",
-      FOSRemarks: "ka",
+      id: "2023",
+      name: "ka",
+      role: "frontend",
+      mobile: "7288097613",
+      loginTime: "2023-11-30 18:32:00",
+      latestAddress: "NC",
+      latestTrackTime: "12:15:32",
+      totalVisits: "33",
+      leadID: "543",
     },
+    {
+      id: "2024",
+      name: "ak",
+      role: "admin",
+      mobile: "9392018271",
+      loginTime: "2023-11-30 18:32:00",
+      latestAddress: "AC",
+      latestTrackTime: "12:15:32",
+      totalVisits: "33",
+      leadID: "223",
+    }
   ];
 
   const [fromDate, setFromDate] = useState(
@@ -102,24 +92,16 @@ function FieldReport() {
   const filteredReviewsData = reviewsTable.filter((item) => {
     return (
       item.id?.includes(filterText) ||
-      item.customerFirstName
+      item.name
         ?.toLowerCase()
         .includes(filterText.toLowerCase()) ||
-      item.customerLastName?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.DPCode?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.fieldVisitStatus?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.customerMobile?.includes(filterText) ||
-      item.portfolio?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.allocatedTo?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.FOS?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.lastActionedBy?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.status?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.followupDate?.includes(filterText) ||
-      item.reviewAddedBy?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.review?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.reviewDate?.includes(filterText) ||
-      item.remarks?.toLowerCase().includes(filterText.toLowerCase()) ||
-      item.FOSRemarks?.toLowerCase().includes(filterText.toLowerCase())
+      item.role?.toLowerCase().includes(filterText.toLowerCase()) ||
+      item.mobile?.includes(filterText) ||
+      item.loginTime?.includes(filterText) ||
+      item.latestAddress?.toLowerCase().includes(filterText.toLowerCase()) ||
+      item.latestTrackTime?.includes(filterText) ||
+      item.totalVisits?.includes(filterText) ||
+      item.leadID?.includes(filterText)
     );
   });
 
@@ -129,85 +111,42 @@ function FieldReport() {
       selector: (row) => row.id,
     },
     {
-      name: "Customer First Name",
-      selector: (row) => row.customerFirstName,
-      sortable: true,
+      name: "Name",
+      selector: (row) => row.name,
     },
     {
-      name: "Customer Last Name",
-      selector: (row) => row.customerLastName,
-      sortable: true,
+      name: "Role",
+      selector: (row) => row.role,
     },
     {
-      name: "DP Code",
-      selector: (row) => row.DPCode,
-      sortable: true,
+      name: "Mobile",
+      selector: (row) => row.mobile,
     },
     {
-      name: "Field Visit Status",
-      selector: (row) => row.fieldVisitStatus,
-      sortable: true,
+      name: "Login Time",
+      selector: (row) => row.loginTime,
     },
     {
-      name: "Customer Mobile",
-      selector: (row) => row.customerMobile,
-      sortable: true,
+      name: "Latest Address",
+      selector: (row) => row.latestAddress,
     },
     {
-      name: "Portfolio",
-      selector: (row) => row.portfolio,
-      sortable: true,
+      name: "Latest Track Time",
+      selector: (row) => row.latestTrackTime,
     },
     {
-      name: "Allocated To",
-      selector: (row) => row.allocatedTo,
-      sortable: true,
+      name: "Total Visits",
+      selector: (row) => row.totalVisits,
     },
     {
-      name: "FOS",
-      selector: (row) => row.FOS,
-      sortable: true,
-    },
-    {
-      name: "Status",
-      selector: (row) => row.status,
-      sortable: true,
-    },
-    {
-      name: "Followup Date",
-      selector: (row) => row.followupDate,
-      sortable: true,
-    },
-    {
-      name: "Review Added By",
-      selector: (row) => row.reviewAddedBy,
-      sortable: true,
-    },
-    {
-      name: "Review",
-      selector: (row) => row.review,
-      sortable: true,
-    },
-    {
-      name: "Review Date",
-      selector: (row) => row.reviewDate,
-      sortable: true,
-    },
-    {
-      name: "Remarks",
-      selector: (row) => row.remarks,
-      sortable: true,
-    },
-    {
-      name: "FOS Remarks",
-      selector: (row) => row.FOSRemarks,
-      sortable: true,
-    },
+      name: "Lead Id",
+      selector: (row) => row.leadID,
+    }
   ];
 
   const filterHandler = (e) => {
     e.preventDefault();
-    console.log(fromDate, toDate);
+    console.log(fromDate, toDate, portfolio, minimumAgeOFLastCall);
   };
 
   return (
@@ -313,14 +252,14 @@ function FieldReport() {
 
       <div className="">
         <div className="d-flex justify-content-end bg-white p-1">
-          <Button.Ripple
+          {/* <Button.Ripple
             onClick={() => downloadExcelTable(reviewsTableData)}
             className="mr-1"
             color="primary"
             size="sm"
           >
             Excel
-          </Button.Ripple>
+          </Button.Ripple> */}
           <Input
             type="search"
             value={filterText}

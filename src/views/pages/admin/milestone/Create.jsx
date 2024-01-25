@@ -4,7 +4,8 @@ import { downloadExcelTable } from "../../../../utility/app/downloadExcelTable";
 import Select from "react-select";
 import DataTable from "react-data-table-component";
 import { Search } from "react-feather";
-import { FormGroup, Form, Button, Input, Label } from "reactstrap";
+import { FormGroup, Form, Button, Input, Label, Row, Col } from "reactstrap";
+import DetailsBox from "../../../../@core/components/ametecs/milestone/DetailsBox";
 import TargetPercentageInput from "../../../../@core/components/ametecs/createMilestone/TargetPercentageInput";
 
 import "@styles/react/libs/flatpickr/flatpickr.scss";
@@ -176,6 +177,8 @@ function Create() {
           </FormGroup>
         </div>
       </Form>
+
+      <DetailsBox/>
 
       <div>
         <DataTable

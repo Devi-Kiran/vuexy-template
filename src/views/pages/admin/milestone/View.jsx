@@ -4,6 +4,7 @@ import { downloadExcelTable } from "../../../../utility/app/downloadExcelTable";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import { Search } from "react-feather";
+import DetailsBox from "../../../../@core/components/ametecs/milestone/DetailsBox";
 import Select from "react-select";
 import {
   Card,
@@ -285,6 +286,8 @@ function View() {
           </Form>
         </CardBody>
       </Card>
+
+      <DetailsBox/>
 
       <div>
         <DataTable
